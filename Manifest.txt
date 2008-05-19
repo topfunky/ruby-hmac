@@ -1,0 +1,12 @@
+History.txt
+lib
+lib/hmac-md5.rb
+lib/hmac-rmd160.rb
+lib/hmac-sha1.rb
+lib/hmac-sha2.rb
+lib/hmac.rb
+Manifest.txt
+Rakefile
+README.txt
+test/
+test/test_hmac.rb
