@@ -1,12 +1,12 @@
 Gem::Specification.new do |s|
   s.name = %q{ruby-hmac}
-  s.version = "0.3.1"
+  s.version = "0.3.2"
 
   s.specification_version = 2 if s.respond_to? :specification_version=
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Daiki Ueno", "Geoffrey Grosenbach"]
-  s.date = %q{2008-05-19}
+  s.date = %q{2008-08-20}
   s.description = %q{A MAC provides a way to check the integrity of information transmitted over or stored in an unreliable medium, based on a secret key.}
   s.email = %q{boss@topfunky.com}
   s.extra_rdoc_files = ["History.txt", "Manifest.txt", "README.txt"]

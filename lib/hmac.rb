@@ -13,14 +13,14 @@
 
 module HMAC
   
-  VERSION = '0.3.1'
+  VERSION = '0.3.2'
   
   class Base
     def initialize(algorithm, block_size, output_length, key)
       @algorithm = algorithm
       @block_size = block_size
       @output_length = output_length
-      @status = STATUS_UNDEFINED
+      @initialized = false
       @key_xor_ipad = ''
       @key_xor_opad = ''
       set_key(key) unless key.nil?
@@ -28,7 +28,7 @@ module HMAC
 
     private
     def check_status
-      unless @status == STATUS_INITIALIZED
+      unless @initialized
 	raise RuntimeError,
 	  "The underlying hash algorithm has not yet been initialized."
       end
@@ -48,7 +48,7 @@ module HMAC
       @key_xor_ipad = key_xor_ipad
       @key_xor_opad = key_xor_opad
       @md = @algorithm.new
-      @status = STATUS_INITIALIZED
+      @initialized = true
     end
 
     def reset_key
@@ -56,7 +56,7 @@ module HMAC
       @key_xor_opad.gsub!(/./, '?')
       @key_xor_ipad[0..-1] = ''
       @key_xor_opad[0..-1] = ''
-      @status = STATUS_UNDEFINED
+      @initialized = false
     end
 
     def update(text)
@@ -110,6 +110,4 @@ module HMAC
 
     private_class_method :new, :digest, :hexdigest
   end
-
-  STATUS_UNDEFINED, STATUS_INITIALIZED = 0, 1
 end
