@@ -20,5 +20,9 @@ Gem::Specification.new do |s|
   s.summary = %q{An implementation of the HMAC authentication code in Ruby.}
   s.test_files = ["test/test_hmac.rb"]
 
-  s.add_dependency(%q<hoe>, [">= 1.5.1"])
+  if s.respond_to? :add_development_dependency
+    s.add_development_dependency('hoe', [">= 1.5.1"])
+  else
+    s.add_dependency(%q<hoe>, [">= 1.5.1"])
+  end
 end
