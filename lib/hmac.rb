@@ -10,11 +10,15 @@
 # These APIs are inspired by JCE 1.2's javax.crypto.Mac interface.
 #
 #   <URL:http://java.sun.com/security/JCE1.2/spec/apidoc/javax/crypto/Mac.html>
+#
+# Source repository is at
+#
+#   http://github.com/topfunky/ruby-hmac/tree/master
 
 module HMAC
-  
+
   VERSION = '0.3.2'
-  
+
   class Base
     def initialize(algorithm, block_size, output_length, key)
       @algorithm = algorithm
@@ -29,8 +33,8 @@ module HMAC
     private
     def check_status
       unless @initialized
-	raise RuntimeError,
-	  "The underlying hash algorithm has not yet been initialized."
+        raise RuntimeError,
+        "The underlying hash algorithm has not yet been initialized."
       end
     end
 
@@ -42,8 +46,8 @@ module HMAC
       key_xor_ipad = "\x36" * @block_size
       key_xor_opad = "\x5C" * @block_size
       for i in 0 .. key.size - 1
-	key_xor_ipad[i] ^= key[i]
-	key_xor_opad[i] ^= key[i]
+        key_xor_ipad[i] ^= key[i]
+        key_xor_opad[i] ^= key[i]
       end
       @key_xor_ipad = key_xor_ipad
       @key_xor_opad = key_xor_opad
@@ -90,21 +94,21 @@ module HMAC
     # held a key even if it's no longer in use.
     def Base.digest(key, text)
       begin
-	hmac = self.new(key)
-	hmac.update(text)
-	hmac.digest
+        hmac = self.new(key)
+        hmac.update(text)
+        hmac.digest
       ensure
-	hmac.reset_key
+        hmac.reset_key
       end
     end
 
     def Base.hexdigest(key, text)
       begin
-	hmac = self.new(key)
-	hmac.update(text)
-	hmac.hexdigest
+        hmac = self.new(key)
+        hmac.update(text)
+        hmac.hexdigest
       ensure
-	hmac.reset_key
+        hmac.reset_key
       end
     end
 

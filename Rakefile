@@ -13,3 +13,13 @@ Hoe.new('ruby-hmac', HMAC::VERSION) do |p|
   p.changes = p.paragraphs_of('History.txt', 0..1).join("\n\n")
   p.remote_rdoc_dir = '' # Release to root
 end
+
+desc "Simple require on packaged files to make sure they are all there"
+task :verify => :package do
+  # An error message will be displayed if files are missing
+  if system %(ruby -e "require 'pkg/ruby-hmac-#{HMAC::VERSION}/lib/hmac'")
+    puts "\nThe library files are present"
+  end
+end
+
+task :release => :verify
