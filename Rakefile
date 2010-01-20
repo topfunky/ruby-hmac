@@ -9,6 +9,7 @@ Hoe.spec 'ruby-hmac' do
 end
 
 Hoe.plugin :minitest
+Hoe.plugin :git
 
 desc "Simple require on packaged files to make sure they are all there"
 task :verify => :package do
