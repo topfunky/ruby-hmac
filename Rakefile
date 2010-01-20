@@ -10,6 +10,7 @@ end
 
 Hoe.plugin :minitest
 Hoe.plugin :git
+Hoe.plugin :gemcutter
 
 desc "Simple require on packaged files to make sure they are all there"
 task :verify => :package do
