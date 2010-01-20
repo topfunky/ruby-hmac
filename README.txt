@@ -1,6 +1,6 @@
-ruby-hmac
-    by Daiki Ueno
-    http://ruby-hmac.rubyforge.org
+= ruby-hmac
+
+* http://ruby-hmac.rubyforge.org
 
 == DESCRIPTION:
   

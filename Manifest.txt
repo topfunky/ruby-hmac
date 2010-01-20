@@ -7,4 +7,5 @@ lib/hmac-rmd160.rb
 lib/hmac-sha1.rb
 lib/hmac-sha2.rb
 lib/hmac.rb
+lib/ruby_hmac.rb
 test/test_hmac.rb

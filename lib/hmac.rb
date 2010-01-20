@@ -17,7 +17,7 @@
 
 module HMAC
 
-  VERSION = '0.3.2'
+  VERSION = '0.4.0'
 
   class Base
     def initialize(algorithm, block_size, output_length, key)
@@ -43,14 +43,15 @@ module HMAC
       # If key is longer than the block size, apply hash function
       # to key and use the result as a real key.
       key = @algorithm.digest(key) if key.size > @block_size
-      key_xor_ipad = "\x36" * @block_size
-      key_xor_opad = "\x5C" * @block_size
-      for i in 0 .. key.size - 1
-        key_xor_ipad[i] ^= key[i]
-        key_xor_opad[i] ^= key[i]
+      akey = key.unpack("C*")
+      key_xor_ipad = ("\x36" * @block_size).unpack("C*")
+      key_xor_opad = ("\x5C" * @block_size).unpack("C*")
+      for i in 0 .. akey.size - 1
+        key_xor_ipad[i] ^= akey[i]
+        key_xor_opad[i] ^= akey[i]
       end
-      @key_xor_ipad = key_xor_ipad
-      @key_xor_opad = key_xor_opad
+      @key_xor_ipad = key_xor_ipad.pack("C*")
+      @key_xor_opad = key_xor_opad.pack("C*")
       @md = @algorithm.new
       @initialized = true
     end
@@ -93,8 +94,8 @@ module HMAC
     # instance methods combinatorially because an instance will have
     # held a key even if it's no longer in use.
     def Base.digest(key, text)
+      hmac = self.new(key)
       begin
-        hmac = self.new(key)
         hmac.update(text)
         hmac.digest
       ensure
@@ -103,8 +104,8 @@ module HMAC
     end
 
     def Base.hexdigest(key, text)
+      hmac = self.new(key)
       begin
-        hmac = self.new(key)
         hmac.update(text)
         hmac.hexdigest
       ensure
