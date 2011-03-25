@@ -2,6 +2,12 @@
 
 * http://ruby-hmac.rubyforge.org
 
+== IMPORTANT: USE OpenSSL INSTEAD!
+
+The HMAC functionality included with OpenSSL is available from Ruby and is much faster. It's recommended that you use OpenSSL instead of this library.
+
+See the blog post on [OpenSSL vs. Ruby HMAC Benchmarks](http://blog.nathanielbibler.com/post/63031273/openssl-hmac-vs-ruby-hmac-benchmarks).
+
 == DESCRIPTION:
   
 This module provides common interface to HMAC functionality. HMAC is a kind of "Message Authentication Code" (MAC) algorithm whose standard is documented in RFC2104. Namely, a MAC provides a way to check the integrity of information transmitted over or stored in an unreliable medium, based on a secret key.
